@@ -7,12 +7,13 @@
 <body>
 
   <div class="hero">
-    <h1 contenteditable>🔥WOAH!</h1>
+    <h1 contenteditable>Magic</h1>
   </div>
 
   <style>
   html {
-    color: black;
+    color: rgb(189, 242, 237);
+    background-color: rgb(60, 0, 112);
     font-family: sans-serif;
   }
 
@@ -25,16 +26,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: rgb(189, 242, 237);
   }
 
   h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    text-shadow: 10px 10px 0 rgba(84, 184, 174);
     font-size: 100px;
   }
   </style>
 
 <script>
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+  const walk = 500;
+
+  function shadow(e) {
+    console.log("mouseMoveeedd");
+    const { offsetWidth: width, offsetHeight: height } = hero;
+    let { offsetX: x, offsetY: y } = e;
+
+    if (this !== e.target) {
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+    }
+
+    const xWalk = Math.round((x/width * walk) - (walk/2));
+    const yWalk = Math.round((y/height * walk) - (walk/2));
+
+    text.style.textShadow = `
+      ${xWalk}px ${yWalk}px 0 rgba(28, 252, 230,0.9),
+      ${xWalk * -1}px ${yWalk}px 0 rgba(15, 171, 255,0.9),
+      ${yWalk}px ${xWalk * -1}px 0 rgba(5, 12, 230,0.7),
+      ${yWalk * -1}px ${xWalk}px 0 rgba(156, 70, 227,0.7)
+    `;
+
+  }
+    hero.addEventListener('mousemove', shadow);
 </script>
 </body>
 </html>
